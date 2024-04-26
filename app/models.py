@@ -1,10 +1,24 @@
 from django.db import models
 
+class Ministry(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    name = models.CharField(max_length=40)
+    description = models.CharField(max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = "ministry"
+        verbose_name_plural = "Ministries"
+
+    def __str__(self):
+        return self.name
 
 class Function(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
+    ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
@@ -18,9 +32,11 @@ class Function(models.Model):
 class User(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=40)
+    password = models.CharField(max_length=40)
     date_of_birth = models.DateField(null=True, blank=True)
     email = models.EmailField()
     function = models.ForeignKey(Function, on_delete=models.PROTECT, null=True, blank=True)
+    ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
@@ -60,21 +76,6 @@ class Song(models.Model):
     def __str__(self):
         return f"{self.name} ' - ' {self.description}"
 
-class Ministry(models.Model):
-    id = models.AutoField(primary_key=True, unique=True)
-    name = models.CharField(max_length=40)
-    description = models.CharField(max_length=255, null=True, blank=True)
-    participant = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        db_table = "ministry"
-        verbose_name_plural = "Ministries"
-
-    def __str__(self):
-        return self.name
-
 class Scale(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
@@ -82,6 +83,7 @@ class Scale(models.Model):
     song = models.ForeignKey(Song, on_delete=models.PROTECT, null=True, blank=True)
     participant = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     function = models.ForeignKey(Function, on_delete=models.PROTECT, null=True, blank=True)
+    ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
