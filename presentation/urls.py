@@ -1,15 +1,16 @@
 from django.urls import path
 
 from presentation.controllers.Function.FunctionView import FunctionView
-from presentation.controllers.Ministry.MinistryView import MinistryView
-from presentation.controllers.User.UserView import UserView
+from presentation.controllers.Ministry.CreateMinistryView import CreateMinistryView
+from presentation.controllers.User.CreateUserView import CreateUserView
+from presentation.controllers.User.EditUserView import EditUserView
 
 
 urlpatterns = [
-    path("create-user", UserView.as_view()),
-    path("delete-user/<int:id>", UserView.as_view()),
+    path("create-user", CreateUserView.as_view()),
+    path("edit-user/<int:id>", EditUserView.as_view()),
 
     path("create-function", FunctionView.as_view()),
 
-    path("create-ministry", MinistryView.as_view()),
+    path("create-ministry", CreateMinistryView.as_view()),
 ]
