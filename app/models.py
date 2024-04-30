@@ -33,7 +33,7 @@ class User(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=40)
     password = models.CharField(max_length=40)
-    date_of_birth = models.DateField(null=True, blank=True)
+    birth_day = models.DateField(null=True, blank=True)
     email = models.EmailField()
     function = models.ForeignKey(Function, on_delete=models.PROTECT, null=True, blank=True)
     ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT, null=True, blank=True)
