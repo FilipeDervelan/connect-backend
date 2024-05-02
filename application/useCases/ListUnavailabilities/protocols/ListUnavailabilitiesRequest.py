@@ -1,0 +1,2 @@
+class ListUnavailabilitiesRequest:
+    request:str
