@@ -1,0 +1,2 @@
+class ListScalesRequest:
+    request:str
