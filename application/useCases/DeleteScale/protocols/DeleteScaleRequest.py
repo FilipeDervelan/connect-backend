@@ -1,0 +1,2 @@
+class DeleteScaleRequest:
+    id:int
