@@ -18,7 +18,7 @@ class Function(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT, null=True, blank=True)
+    ministry = models.ForeignKey(Ministry, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
@@ -80,6 +80,7 @@ class Scale(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100, null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
     song = models.ManyToManyField(Song, null=True, blank=True)
     participant = models.ManyToManyField(User, null=True, blank=True)
     function = models.ManyToManyField(Function, null=True, blank=True)
