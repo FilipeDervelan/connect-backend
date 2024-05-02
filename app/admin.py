@@ -6,8 +6,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ["name"]
     list_display = ["name",
                     "email",
-                    "function",
-                    "ministry",
+                    "birth_day",
                     "created_at",
                     "updated_at"
     ]
