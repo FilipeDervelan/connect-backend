@@ -1,0 +1,2 @@
+class DeleteUserRequest:
+    id:int
