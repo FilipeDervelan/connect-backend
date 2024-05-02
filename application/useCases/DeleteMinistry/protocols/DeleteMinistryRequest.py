@@ -1,0 +1,2 @@
+class DeleteMinistryRequest:
+    id:int
