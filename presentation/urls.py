@@ -11,6 +11,7 @@ from presentation.controllers.Ministry.UpdateMinistryView import UpdateMinistryV
 from presentation.controllers.Scale.CreateScaleView import CreateScaleView
 from presentation.controllers.Scale.ListScalesView import ListScalesView
 from presentation.controllers.Unavailability.CreateUnavailabilityView import CreateUnavailabilityView
+from presentation.controllers.Unavailability.ListUnavailabilitiesView import ListUnavailabilitiesView
 from presentation.controllers.User.CreateUserView import CreateUserView
 from presentation.controllers.User.DeleteUserView import DeleteUserView
 from presentation.controllers.User.EditUserView import EditUserView
@@ -33,6 +34,7 @@ urlpatterns = [
     path("list-scales", ListScalesView.as_view()),
 
     path("create-unavailability", CreateUnavailabilityView.as_view()),
+    path("list-unavailabilities", ListUnavailabilitiesView.as_view()),
 
     path("assign-ministry", AssignMinistryView.as_view()),
     path("assign-function", AssignFunctionView.as_view()),
