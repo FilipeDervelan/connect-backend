@@ -15,7 +15,7 @@ class CreateMinistry:
 
         # Transfering the inbound properties value to variables
         name = inbound.name
-        description = inbound.description if inbound.description else None
+        description = inbound.description
 
         # Creating user
         newMinistry = Ministry(name=name, description=description)
