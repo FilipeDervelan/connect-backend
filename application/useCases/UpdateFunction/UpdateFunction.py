@@ -1,3 +1,4 @@
+from datetime import datetime
 from app.models import Function, Ministry
 from application.useCases.UpdateFunction.protocols.UpdateFunctionRequest import UpdateFunctionRequest
 from application.useCases.UpdateFunction.protocols.UpdateFunctionResponse import UpdateFunctionResponse
@@ -12,6 +13,7 @@ class UpdateFunction:
         obj.name = inbound.name
         obj.description = inbound.description
         obj.ministry = ministry
+        obj.updated_at = datetime.now()
 
         obj.save()
 

@@ -14,6 +14,7 @@ class EditUser:
 
         user.name = inbound.name
         user.birth_day = birth_day
+        user.updated_at = datetime.now()
 
         user.save()
 
