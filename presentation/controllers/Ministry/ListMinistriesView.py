@@ -8,8 +8,9 @@ from application.useCases.ListMinistries.protocols.ListMinistriesRequest import 
 
 class ListMinistriesView(APIView):
     def get(self, request):
+        print("List ministries")
         inbound = ListMinistriesRequest()
-        inbound.request = "GET"
+        inbound.request = ""
 
         useCase = ListMinistries()
         result = useCase.execute(inbound)
