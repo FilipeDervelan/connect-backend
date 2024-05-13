@@ -11,7 +11,7 @@ class ListMinistries:
         scaleList = []
 
         for item in ministries:
-            scales = Scale.objects.filter(id=item.id)
+            scales = Scale.objects.filter(ministry=item.id)
 
             for scale in scales:
                 scaleList.append({
@@ -19,9 +19,9 @@ class ListMinistries:
                     "name": scale.name,
                     "description": scale.description,
                     "date": scale.date,
-                    "songs": scale.song,
-                    "participants": scale.participant,
-                    "functions": scale.function
+                    "songs": [song.id for song in scale.song.all()],
+                    "participants": [participant.id for participant in scale.participant.all()],
+                    "functions": [function.id for function in scale.function.all()]
                 })
 
             ministriesList.append({

@@ -1,7 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-
 from application.useCases.ListMinistries.ListMinistries import ListMinistries
 from application.useCases.ListMinistries.protocols.ListMinistriesRequest import ListMinistriesRequest
 
@@ -15,6 +14,6 @@ class ListMinistriesView(APIView):
         useCase = ListMinistries()
         result = useCase.execute(inbound)
 
-        outbound = result.__dict__
+        outbound = result.response
 
         return Response({"data": outbound}, status=status.HTTP_200_OK)
