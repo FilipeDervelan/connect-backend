@@ -16,4 +16,4 @@ class ListMinistriesView(APIView):
 
         outbound = result.response
 
-        return Response({"data": outbound}, status=status.HTTP_200_OK)
+        return Response(outbound, status=status.HTTP_200_OK)

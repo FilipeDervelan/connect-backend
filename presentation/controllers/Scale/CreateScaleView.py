@@ -24,4 +24,4 @@ class CreateScaleView(APIView):
         # Serializing
         outbound = result.__dict__
 
-        return Response({"data": outbound}, status=status.HTTP_201_CREATED)
+        return Response(outbound, status=status.HTTP_201_CREATED)
