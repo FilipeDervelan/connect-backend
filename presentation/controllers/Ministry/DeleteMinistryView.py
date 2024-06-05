@@ -20,7 +20,7 @@ class DeleteMinistryView(APIView):
             # Serializing
             outbound = result.__dict__
 
-            return Response({"data": outbound}, status=status.HTTP_200_OK)
+            return Response(outbound, status=status.HTTP_200_OK)
 
         except Exception as e:
             import traceback
