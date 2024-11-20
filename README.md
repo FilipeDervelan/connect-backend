@@ -11,7 +11,7 @@
 - [x] CRUD de ministérios
 - [x] CRUD de escalas
 - [x] CRUD de indisponibilidades
-- [ ] Criação de usuários e permissões
+- [ ] Log In e permissões
 
 ### Pré-requisitos
 
