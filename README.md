@@ -48,7 +48,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
-- [Django Rest Frameword](https://www.django-rest-framework.org/)
+- [Django Rest Framework](https://www.django-rest-framework.org/)
 
 ### Autor
 ---
