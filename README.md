@@ -4,6 +4,8 @@
 	🚧  Connect Backend 🚀 Em construção...  🚧
 </h4>
 
+<p>Backend para aplicações de gerenciamento de escalas e membros de igrejas</p>
+
 ### Features
 
 - [x] CRUD de ministérios
