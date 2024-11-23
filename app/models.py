@@ -120,4 +120,4 @@ class Unavailability(models.Model):
         verbose_name_plural = "Unavailabilities"
 
     def __str__(self) -> str:
-        return f"{self.user.name} ' - ' {self.start_date} ' - ' {self.end_date}"
+        return f"{self.user.username} - {self.start_date} - {self.end_date}"
