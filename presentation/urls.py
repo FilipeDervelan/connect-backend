@@ -18,6 +18,8 @@ from presentation.controllers.Scale.CreateScaleView import CreateScaleView
 from presentation.controllers.Scale.DeleteScaleView import DeleteScaleView
 from presentation.controllers.Scale.ListScalesView import ListScalesView
 from presentation.controllers.Scale.UpdateScaleView import UpdateScaleView
+from presentation.controllers.Song.CreateSongView import CreateSongView
+from presentation.controllers.Song.ListSongsView import ListSongsView
 from presentation.controllers.Unavailability.CreateUnavailabilityView import (
     CreateUnavailabilityView,
 )
@@ -66,4 +68,6 @@ urlpatterns = [
     path("deassign-ministry", DeassignMinistryView.as_view()),
     path("assign-function", AssignFunctionView.as_view()),
     path("delete-unavailability/<int:id>", DeleteUnavailabilityView.as_view()),
+    path("create-song", CreateSongView.as_view()),
+    path("list-songs", ListSongsView.as_view()),
 ]
