@@ -11,6 +11,9 @@ from presentation.controllers.Ministry.CreateMinistryView import CreateMinistryV
 from presentation.controllers.Ministry.DeleteMinistryView import DeleteMinistryView
 from presentation.controllers.Ministry.ListMinistriesView import ListMinistriesView
 from presentation.controllers.Ministry.UpdateMinistryView import UpdateMinistryView
+from presentation.controllers.Ministry.DeassignMinistryView import (
+    DeassignMinistryView,
+)
 from presentation.controllers.Scale.CreateScaleView import CreateScaleView
 from presentation.controllers.Scale.DeleteScaleView import DeleteScaleView
 from presentation.controllers.Scale.ListScalesView import ListScalesView
@@ -18,12 +21,16 @@ from presentation.controllers.Scale.UpdateScaleView import UpdateScaleView
 from presentation.controllers.Unavailability.CreateUnavailabilityView import (
     CreateUnavailabilityView,
 )
+from presentation.controllers.Unavailability.DeleteUnavailabilityView import (
+    DeleteUnavailabilityView,
+)
 from presentation.controllers.Unavailability.ListUnavailabilitiesView import (
     ListUnavailabilitiesView,
 )
 from presentation.controllers.Unavailability.UpdateUnavailabilityView import (
     UpdateUnavailabilityView,
 )
+from presentation.controllers.User.DeleteUserView import DeleteUserView
 from presentation.controllers.register_user.register_user_view import RegisterUserView
 
 
@@ -41,7 +48,7 @@ urlpatterns = [
         name="token_refresh",
     ),
     # path("edit-user/<int:id>", EditUserView.as_view()),
-    # path("delete-user/<int:id>", DeleteUserView.as_view()),
+    path("delete-user/<int:id>", DeleteUserView.as_view()),
     path("create-function", CreateFunctionView.as_view()),
     path("update-function", UpdateFunctionView.as_view()),
     path("create-ministry", CreateMinistryView.as_view()),
@@ -56,5 +63,7 @@ urlpatterns = [
     path("list-unavailabilities", ListUnavailabilitiesView.as_view()),
     path("update-unavailability/<int:id>", UpdateUnavailabilityView.as_view()),
     path("assign-ministry", AssignMinistryView.as_view()),
+    path("deassign-ministry", DeassignMinistryView.as_view()),
     path("assign-function", AssignFunctionView.as_view()),
+    path("delete-unavailability/<int:id>", DeleteUnavailabilityView.as_view()),
 ]
