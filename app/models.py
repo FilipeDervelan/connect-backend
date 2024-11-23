@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 
 class Ministry(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
@@ -14,11 +16,14 @@ class Ministry(models.Model):
     def __str__(self):
         return self.name
 
+
 class Function(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    ministry = models.ForeignKey(Ministry, on_delete=models.CASCADE, null=True, blank=True)
+    ministry = models.ForeignKey(
+        Ministry, on_delete=models.CASCADE, null=True, blank=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
@@ -29,23 +34,21 @@ class Function(models.Model):
     def __str__(self):
         return self.name
 
-class User(models.Model):
-    id = models.AutoField(primary_key=True, unique=True)
-    name = models.CharField(max_length=40)
-    password = models.CharField(max_length=40)
+
+class CustomUser(AbstractUser):
     birth_day = models.DateField(null=True, blank=True)
-    email = models.EmailField()
-    function = models.ManyToManyField(Function, null=True, blank=True)
-    ministry = models.ManyToManyField(Ministry, null=True, blank=True)
+    function = models.ManyToManyField(Function, blank=True)
+    ministry = models.ManyToManyField(Ministry, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "user"
-        verbose_name_plural = "Users"
+        db_table = "custom_user"
+        verbose_name_plural = "Custom Users"
 
     def __str__(self):
-        return self.name
+        return self.get_full_name() or self.username
+
 
 class Singer(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
@@ -60,12 +63,18 @@ class Singer(models.Model):
     def __str__(self):
         return self.name
 
+
 class Song(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     link = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=True, blank=True)
-    singer = models.ForeignKey(Singer, on_delete=models.PROTECT, null=True, blank=True)
+    singer = models.ForeignKey(
+        Singer,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
@@ -76,13 +85,14 @@ class Song(models.Model):
     def __str__(self):
         return f"{self.name} ' - ' {self.description}"
 
+
 class Scale(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     song = models.ManyToManyField(Song, null=True, blank=True)
-    participant = models.ManyToManyField(User, null=True, blank=True)
+    participant = models.ManyToManyField(CustomUser, null=True, blank=True)
     function = models.ManyToManyField(Function, null=True, blank=True)
     ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -95,11 +105,12 @@ class Scale(models.Model):
     def __str__(self):
         return self.name
 
+
 class Unavailability(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     start_date = models.DateField()
     end_date = models.DateField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
