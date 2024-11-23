@@ -1,0 +1,2 @@
+class DeleteUnavailabilityRequest:
+    id: int

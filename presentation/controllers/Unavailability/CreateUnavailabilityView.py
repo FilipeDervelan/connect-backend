@@ -18,11 +18,11 @@ class CreateUnavailabilityView(APIView):
         inbound = CreateUnavailabilityRequest()
         inbound.start_date = request.data.get("start_date")
         inbound.end_date = request.data.get("end_date")
-        inbound.user_id = request.data.get("user_id")
+        inbound.user_id = request.user.id
 
         useCase = CreateUnavailability()
         result = useCase.execute(inbound)
 
         outbound = result.__dict__
 
-        return Response({"data": outbound}, status=status.HTTP_201_CREATED)
+        return Response(outbound, status=status.HTTP_201_CREATED)
