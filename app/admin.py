@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.models import CustomUser, Function, Ministry, Scale
+from app.models import CustomUser, Function, Ministry, Scale, Unavailability
 
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -16,8 +16,20 @@ class CustomUserAdmin(admin.ModelAdmin):
     ]
 
 
+class UnavailabilityAdmin(admin.ModelAdmin):
+    search_fields = ["name"]
+    list_display = [
+        "user",
+        "start_date",
+        "end_date",
+        "created_at",
+        "updated_at",
+    ]
+
+
 # Register your models here.
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Ministry)
 admin.site.register(Function)
 admin.site.register(Scale)
+admin.site.register(Unavailability, UnavailabilityAdmin)
