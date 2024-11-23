@@ -1,9 +1,11 @@
 from django.urls import path
+from rest_framework_simplejwt import views as jwt_views
 
 
 from presentation.controllers.Function.AssignFunctionView import AssignFunctionView
 from presentation.controllers.Function.CreateFunctionView import CreateFunctionView
 from presentation.controllers.Function.UpdateFunctionView import UpdateFunctionView
+from presentation.controllers.Logout.logout_view import LogoutView
 from presentation.controllers.Ministry.AssignMinistryView import AssignMinistryView
 from presentation.controllers.Ministry.CreateMinistryView import CreateMinistryView
 from presentation.controllers.Ministry.DeleteMinistryView import DeleteMinistryView
@@ -28,6 +30,17 @@ from presentation.controllers.User.EditUserView import EditUserView
 
 
 urlpatterns = [
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path(
+        "token/",
+        jwt_views.TokenObtainPairView.as_view(),
+        name="token_obtain_pair",
+    ),
+    path(
+        "token/refresh/",
+        jwt_views.TokenRefreshView.as_view(),
+        name="token_refresh",
+    ),
     path("create-user", CreateUserView.as_view()),
     path("edit-user/<int:id>", EditUserView.as_view()),
     path("delete-user/<int:id>", DeleteUserView.as_view()),
