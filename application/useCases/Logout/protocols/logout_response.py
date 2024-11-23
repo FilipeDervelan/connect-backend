@@ -1,0 +1,2 @@
+class LogoutResponse:
+    status: int

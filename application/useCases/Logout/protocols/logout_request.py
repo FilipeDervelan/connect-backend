@@ -1,0 +1,2 @@
+class LogoutRequest:
+    token: str
