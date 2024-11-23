@@ -1,12 +1,19 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
-from application.useCases.UpdateUnavailability.UpdateUnavailability import UpdateUnavailability
-from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityRequest import UpdateUnavailabilityRequest
+from application.useCases.UpdateUnavailability.UpdateUnavailability import (
+    UpdateUnavailability,
+)
+from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityRequest import (
+    UpdateUnavailabilityRequest,
+)
 
 
 class UpdateUnavailabilityView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def put(self, request, id):
         inbound = UpdateUnavailabilityRequest()
         inbound.id = id

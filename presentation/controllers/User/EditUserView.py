@@ -1,11 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 from application.useCases.EditUser.EditUser import EditUser
 from application.useCases.EditUser.protocols.EditUserRequest import EditUserRequest
 
+
 class EditUserView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def put(self, request, id):
         try:
             # Building inbound
@@ -25,5 +29,9 @@ class EditUserView(APIView):
 
         except Exception as e:
             import traceback
+
             traceback.print_exc()
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

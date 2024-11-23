@@ -1,12 +1,17 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from application.useCases.ListScales.ListScales import ListScales
-from application.useCases.ListScales.protocols.ListScalesRequest import ListScalesRequest
+from application.useCases.ListScales.protocols.ListScalesRequest import (
+    ListScalesRequest,
+)
 
 
 class ListScalesView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request):
         inbound = ListScalesRequest()
         inbound.request = "GET"

@@ -1,11 +1,17 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from application.useCases.CreateScale.CreateScale import CreateScale
-from application.useCases.CreateScale.protocols.CreateScaleRequest import CreateScaleRequest
+from application.useCases.CreateScale.protocols.CreateScaleRequest import (
+    CreateScaleRequest,
+)
+
 
 class CreateScaleView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request):
         # Building inbound
         inbound = CreateScaleRequest()

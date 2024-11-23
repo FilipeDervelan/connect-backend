@@ -1,12 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 from application.useCases.UpdateMinistry.UpdateMinistry import UpdateMinistry
-from application.useCases.UpdateMinistry.protocols.UpdateMinistryRequest import UpdateMinistryRequest
+from application.useCases.UpdateMinistry.protocols.UpdateMinistryRequest import (
+    UpdateMinistryRequest,
+)
 
 
 class UpdateMinistryView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def put(self, request, id):
         try:
             # Building inbound
@@ -26,5 +31,9 @@ class UpdateMinistryView(APIView):
 
         except Exception as e:
             import traceback
+
             traceback.print_exc()
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

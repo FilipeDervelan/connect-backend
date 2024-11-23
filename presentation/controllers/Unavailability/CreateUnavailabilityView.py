@@ -1,12 +1,19 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
-from application.useCases.CreateUnavailability.CreateUnavailability import CreateUnavailability
-from application.useCases.CreateUnavailability.protocols.CreateUnavailabilityRequest import CreateUnavailabilityRequest
+from application.useCases.CreateUnavailability.CreateUnavailability import (
+    CreateUnavailability,
+)
+from application.useCases.CreateUnavailability.protocols.CreateUnavailabilityRequest import (
+    CreateUnavailabilityRequest,
+)
 
 
 class CreateUnavailabilityView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request):
         inbound = CreateUnavailabilityRequest()
         inbound.start_date = request.data.get("start_date")

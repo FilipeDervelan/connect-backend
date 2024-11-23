@@ -1,12 +1,17 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from application.useCases.UpdateScale.UpdateScale import UpdateScale
-from application.useCases.UpdateScale.protocols.UpdateScaleRequest import UpdateScaleRequest
+from application.useCases.UpdateScale.protocols.UpdateScaleRequest import (
+    UpdateScaleRequest,
+)
 
 
 class UpdateScaleView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def put(self, request, id):
         inbound = UpdateScaleRequest()
         inbound.id = id
