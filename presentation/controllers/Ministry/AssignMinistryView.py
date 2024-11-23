@@ -13,16 +13,20 @@ class AssignMinistryView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def patch(self, request):
-        # Building inbound
-        inbound = AssignMinistryRequest()
-        inbound.user_id = request.data.get("user_id")
-        inbound.ministry_id = request.data.get("ministry_id")
+        try:
+            inbound = AssignMinistryRequest()
+            inbound.user_id = request.data.get("user_id")
+            inbound.ministry_id = request.data.get("ministry_id")
 
-        # Calling use case
-        useCase = AssignMinistry()
-        result = useCase.execute(inbound)
+            useCase = AssignMinistry()
+            result = useCase.execute(inbound)
 
-        # Serializing
-        outbound = result.__dict__
+            outbound = result.__dict__
 
-        return Response(outbound, status=status.HTTP_200_OK)
+            return Response(outbound, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                str(e),
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

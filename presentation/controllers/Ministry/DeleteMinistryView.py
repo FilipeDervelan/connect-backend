@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -12,17 +13,14 @@ from application.useCases.DeleteMinistry.protocols.DeleteMinistryRequest import 
 class DeleteMinistryView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def delete(self, request, id):
+    def delete(self, request: Request, id: str) -> Response:
         try:
-            # Building inbound
             inbound = DeleteMinistryRequest()
             inbound.id = id
 
-            # Calling use case
             useCase = DeleteMinistry()
             result = useCase.execute(inbound)
 
-            # Serializing
             outbound = result.__dict__
 
             return Response(outbound, status=status.HTTP_200_OK)

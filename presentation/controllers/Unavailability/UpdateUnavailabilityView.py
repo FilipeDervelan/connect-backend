@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -14,7 +15,7 @@ from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityReq
 class UpdateUnavailabilityView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def put(self, request, id):
+    def put(self, request: Request, id: str) -> Response:
         inbound = UpdateUnavailabilityRequest()
         inbound.id = id
         inbound.start_date = request.data.get("start_date")

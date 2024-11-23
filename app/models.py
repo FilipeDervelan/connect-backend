@@ -6,6 +6,7 @@ class Ministry(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=40)
     description = models.CharField(max_length=255, null=True, blank=True)
+    owner_id = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 

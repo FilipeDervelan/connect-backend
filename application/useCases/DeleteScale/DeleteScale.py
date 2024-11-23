@@ -1,6 +1,10 @@
 from app.models import Scale
-from application.useCases.DeleteScale.protocols.DeleteScaleRequest import DeleteScaleRequest
-from application.useCases.DeleteScale.protocols.DeleteScaleResponse import DeleteScaleResponse
+from application.useCases.DeleteScale.protocols.DeleteScaleRequest import (
+    DeleteScaleRequest,
+)
+from application.useCases.DeleteScale.protocols.DeleteScaleResponse import (
+    DeleteScaleResponse,
+)
 
 
 class DeleteScale:

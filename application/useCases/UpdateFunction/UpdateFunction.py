@@ -1,11 +1,18 @@
 from datetime import datetime
 from app.models import Function, Ministry
-from application.useCases.UpdateFunction.protocols.UpdateFunctionRequest import UpdateFunctionRequest
-from application.useCases.UpdateFunction.protocols.UpdateFunctionResponse import UpdateFunctionResponse
+from application.useCases.UpdateFunction.protocols.UpdateFunctionRequest import (
+    UpdateFunctionRequest,
+)
+from application.useCases.UpdateFunction.protocols.UpdateFunctionResponse import (
+    UpdateFunctionResponse,
+)
 
 
 class UpdateFunction:
-    def execute(self, inbound: UpdateFunctionRequest) -> UpdateFunctionResponse:
+    def execute(
+        self,
+        inbound: UpdateFunctionRequest,
+    ) -> UpdateFunctionResponse:
         ministry = Ministry.objects.get(id=inbound.ministry_id)
 
         obj = Function.objects.get(id=inbound.id)

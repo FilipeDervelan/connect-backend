@@ -6,20 +6,14 @@ from rest_framework.permissions import IsAuthenticated
 from application.useCases.ListUnavailabilities.ListUnavailabilities import (
     ListUnavailabilities,
 )
-from application.useCases.ListUnavailabilities.protocols.ListUnavailabilitiesRequest import (
-    ListUnavailabilitiesRequest,
-)
 
 
 class ListUnavailabilitiesView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        inbound = ListUnavailabilitiesRequest()
-        inbound.request = "GET"
-
         useCase = ListUnavailabilities()
-        result = useCase.execute(inbound)
+        result = useCase.execute()
 
         outbound = result.__dict__
 

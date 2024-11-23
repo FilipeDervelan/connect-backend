@@ -18,18 +18,14 @@ class CreateMinistryView(APIView):
             inbound = CreateMinistryRequest()
             inbound.name = request.data.get("name")
             inbound.description = request.data.get("description")
+            inbound.user_id = request.user.id
 
-            # Calling use case
-            useCase = CreateMinistry()
-            result = useCase.execute(inbound)
+            use_case = CreateMinistry()
+            result = use_case.execute(inbound)
 
-            # Serializing
             outbound = result.__dict__
 
-            return Response(
-                {"data": outbound},
-                status=status.HTTP_201_CREATED,
-            )
+            return Response(outbound, status=status.HTTP_201_CREATED)
 
         except Exception as e:
             import traceback

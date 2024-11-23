@@ -1,3 +1,4 @@
 class CreateMinistryRequest:
-    name:str
-    description:str
+    name: str
+    description: str
+    user_id: int

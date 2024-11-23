@@ -1,24 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from application.useCases.ListMinistries.ListMinistries import ListMinistries
-from application.useCases.ListMinistries.protocols.ListMinistriesRequest import (
-    ListMinistriesRequest,
-)
 
 
 class ListMinistriesView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request):
-        print("List ministries")
-        inbound = ListMinistriesRequest()
-        inbound.request = ""
-
+    def get(self, request: Request) -> Response:
         useCase = ListMinistries()
-        result = useCase.execute(inbound)
+        result = useCase.execute()
 
         outbound = result.response
 

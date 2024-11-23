@@ -13,7 +13,6 @@ class CreateScaleView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        # Building inbound
         inbound = CreateScaleRequest()
         inbound.name = request.data.get("name")
         inbound.description = request.data.get("description")
@@ -23,11 +22,9 @@ class CreateScaleView(APIView):
         inbound.song = request.data.get("songs")
         inbound.ministry_id = request.data.get("ministry_id")
 
-        # Calling use case
         useCase = CreateScale()
         result = useCase.execute(inbound)
 
-        # Serializing
         outbound = result.__dict__
 
         return Response(outbound, status=status.HTTP_201_CREATED)

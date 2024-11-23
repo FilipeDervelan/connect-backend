@@ -1,18 +1,25 @@
 from datetime import datetime
 from app.models import Unavailability
-from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityRequest import UpdateUnavailabilityRequest
-from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityResponse import UpdateUnavailabilityResponse
+from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityRequest import (
+    UpdateUnavailabilityRequest,
+)
+from application.useCases.UpdateUnavailability.protocols.UpdateUnavailabilityResponse import (
+    UpdateUnavailabilityResponse,
+)
 
 
 class UpdateUnavailability:
-    def execute(self, inbound: UpdateUnavailabilityRequest) -> UpdateUnavailabilityResponse:
+    def execute(
+        self,
+        inbound: UpdateUnavailabilityRequest,
+    ) -> UpdateUnavailabilityResponse:
         obj = Unavailability.objects.get(id=inbound.id)
 
-        startDate = datetime.strptime(inbound.start_date, '%d/%m/%Y')
-        startDate = startDate.strftime('%Y-%m-%d')
+        startDate = datetime.strptime(inbound.start_date, "%d/%m/%Y")
+        startDate = startDate.strftime("%Y-%m-%d")
 
-        endDate = datetime.strptime(inbound.end_date, '%d/%m/%Y')
-        endDate = endDate.strftime('%Y-%m-%d')
+        endDate = datetime.strptime(inbound.end_date, "%d/%m/%Y")
+        endDate = endDate.strftime("%Y-%m-%d")
 
         obj.start_date = startDate
         obj.end_date = endDate

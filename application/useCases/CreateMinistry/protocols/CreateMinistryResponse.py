@@ -1,3 +1,3 @@
 class CreateMinistryResponse:
-    response:str
-    status:int
+    response: str
+    status: int

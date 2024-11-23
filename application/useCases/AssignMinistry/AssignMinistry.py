@@ -1,11 +1,18 @@
-from app.models import Ministry, User
-from application.useCases.AssignMinistry.protocols.AssignMinistryRequest import AssignMinistryRequest
-from application.useCases.AssignMinistry.protocols.AssignMinistryResponse import AssignMinistryResponse
+from app.models import CustomUser, Ministry
+from application.useCases.AssignMinistry.protocols.AssignMinistryRequest import (
+    AssignMinistryRequest,
+)
+from application.useCases.AssignMinistry.protocols.AssignMinistryResponse import (
+    AssignMinistryResponse,
+)
 
 
 class AssignMinistry:
-    def execute(self, inbound: AssignMinistryRequest) -> AssignMinistryResponse:
-        user = User.objects.get(id=inbound.user_id)
+    def execute(
+        self,
+        inbound: AssignMinistryRequest,
+    ) -> AssignMinistryResponse:
+        user = CustomUser.objects.get(id=inbound.user_id)
         ministry = Ministry.objects.get(id=inbound.ministry_id)
 
         result = AssignMinistryResponse()

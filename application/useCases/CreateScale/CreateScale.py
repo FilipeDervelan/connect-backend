@@ -1,8 +1,13 @@
 from datetime import datetime
 from django.db.models import Q
-from app.models import Ministry, Scale, Unavailability, User
-from application.useCases.CreateScale.protocols.CreateScaleRequest import CreateScaleRequest
-from application.useCases.CreateScale.protocols.CreateScaleResponse import CreateScaleResponse
+from app.models import CustomUser, Ministry, Scale, Unavailability
+from application.useCases.CreateScale.protocols.CreateScaleRequest import (
+    CreateScaleRequest,
+)
+from application.useCases.CreateScale.protocols.CreateScaleResponse import (
+    CreateScaleResponse,
+)
+
 
 class CreateScale:
     def execute(self, inbound: CreateScaleRequest) -> CreateScaleResponse:
@@ -12,7 +17,7 @@ class CreateScale:
         songs = inbound.song
         participants = inbound.participants
         functions = inbound.function
-        ministryId = inbound.ministry_id
+        ministry_id = inbound.ministry_id
 
         result = CreateScaleResponse()
 
@@ -26,54 +31,63 @@ class CreateScale:
             result.status = 400
             return result
 
-        if not ministryId:
+        if not ministry_id:
             result.response = "A ministry is required"
             result.status = 400
             return result
 
-        dateFormatted = datetime.strptime(date, '%d/%m/%Y')
-        dateFormatted = dateFormatted.strftime('%Y-%m-%d')
-        
-        ministry = Ministry.objects.get(id=ministryId)
+        formatted_date = datetime.strptime(date, "%d/%m/%Y")
+        formatted_date = formatted_date.strftime("%Y-%m-%d")
 
-        exists = Scale.objects.filter(date=dateFormatted, ministry=ministry.id).first()
+        ministry = Ministry.objects.get(id=ministry_id)
 
-        if exists:
+        scale = Scale.objects.filter(
+            date=formatted_date,
+            ministry=ministry.id,
+        ).first()
+
+        if scale:
             result.response = "A scale alreay exists for this day and this ministry"
-            result.status =  400
+            result.status = 400
 
             return result
 
-        newScale = Scale(name=name, description=description, date=dateFormatted, ministry=ministry)
+        new_scale = Scale(
+            name=name,
+            description=description,
+            date=formatted_date,
+            ministry=ministry,
+        )
 
-        newScale.save()
+        new_scale.save()
 
-        scale = Scale.objects.get(date=dateFormatted, name=name)
+        scale = Scale.objects.get(date=formatted_date, name=name)
 
-        participantsWithUnavailabilities = []
+        participants_with_unavailabilities = []
 
         for id in participants:
-            userRecovered = User.objects.get(id=id)
+            user = CustomUser.objects.get(id=id)
 
             unavailability = Unavailability.objects.filter(
-                Q(user=userRecovered.id) &
-                Q(start_date__lte=dateFormatted) & Q(end_date__gte=dateFormatted) |
-                Q(start_date=dateFormatted) |
-                Q(end_date=dateFormatted)
+                Q(user=user.id)
+                & Q(start_date__lte=formatted_date)
+                & Q(end_date__gte=formatted_date)
+                | Q(start_date=formatted_date)
+                | Q(end_date=formatted_date)
             ).first()
 
             if unavailability:
-                message = f"{userRecovered.name} ({unavailability.start_date} - {unavailability.end_date})"
+                message = f"{user.username} ({unavailability.start_date} - {unavailability.end_date})"
 
-                participantsWithUnavailabilities.append(message)
+                participants_with_unavailabilities.append(message)
 
-            scale.participant.add(userRecovered)
-        
-        if len(participantsWithUnavailabilities) > 0:
-            result.response = f"Some participants are not available for the scale: {participantsWithUnavailabilities}"
+            scale.participant.add(user)
+
+        if len(participants_with_unavailabilities) > 0:
+            result.response = f"Some participants are not available for the scale: {participants_with_unavailabilities}"
         else:
             result.response = "Scale successfully created"
-            
+
         result.status = 201
 
         return result

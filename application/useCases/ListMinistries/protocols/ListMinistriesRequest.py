@@ -1,2 +1,0 @@
-class ListMinistriesRequest:
-    request:str
