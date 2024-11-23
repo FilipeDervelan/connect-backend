@@ -1,5 +1,5 @@
 from datetime import datetime
-from app.models import Ministry, Scale, Song, User
+from app.models import CustomUser, Ministry, Scale, Song
 from application.useCases.UpdateScale.protocols.UpdateScaleRequest import (
     UpdateScaleRequest,
 )
@@ -25,7 +25,7 @@ class UpdateScale:
             obj.song.add(scale_song)
 
         for participant in inbound.participants:
-            scale_participant = User.objects.get(id=participant)
+            scale_participant = CustomUser.objects.get(id=participant)
 
             obj.participant.add(scale_participant)
 
