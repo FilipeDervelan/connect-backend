@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 
 
+from presentation.controllers.Function.AssignFunctionView import AssignFunctionView
 from presentation.controllers.Function.CreateFunctionView import CreateFunctionView
 from presentation.controllers.Function.UpdateFunctionView import UpdateFunctionView
 from presentation.controllers.Logout.logout_view import LogoutView
@@ -11,6 +12,18 @@ from presentation.controllers.Ministry.DeleteMinistryView import DeleteMinistryV
 from presentation.controllers.Ministry.ListMinistriesView import ListMinistriesView
 from presentation.controllers.Ministry.UpdateMinistryView import UpdateMinistryView
 from presentation.controllers.Scale.CreateScaleView import CreateScaleView
+from presentation.controllers.Scale.DeleteScaleView import DeleteScaleView
+from presentation.controllers.Scale.ListScalesView import ListScalesView
+from presentation.controllers.Scale.UpdateScaleView import UpdateScaleView
+from presentation.controllers.Unavailability.CreateUnavailabilityView import (
+    CreateUnavailabilityView,
+)
+from presentation.controllers.Unavailability.ListUnavailabilitiesView import (
+    ListUnavailabilitiesView,
+)
+from presentation.controllers.Unavailability.UpdateUnavailabilityView import (
+    UpdateUnavailabilityView,
+)
 from presentation.controllers.register_user.register_user_view import RegisterUserView
 
 
@@ -27,7 +40,6 @@ urlpatterns = [
         jwt_views.TokenRefreshView.as_view(),
         name="token_refresh",
     ),
-    # path("create-user", CreateUserView.as_view()),
     # path("edit-user/<int:id>", EditUserView.as_view()),
     # path("delete-user/<int:id>", DeleteUserView.as_view()),
     path("create-function", CreateFunctionView.as_view()),
@@ -37,12 +49,12 @@ urlpatterns = [
     path("delete-ministry/<int:id>", DeleteMinistryView.as_view()),
     path("list-ministries", ListMinistriesView.as_view()),
     path("create-scale", CreateScaleView.as_view()),
-    # path("list-scales", ListScalesView.as_view()),
-    # path("delete-scale/<int:id>", DeleteScaleView.as_view()),
-    # path("update-scale/<int:id>", UpdateScaleView.as_view()),
-    # path("create-unavailability", CreateUnavailabilityView.as_view()),
-    # path("list-unavailabilities", ListUnavailabilitiesView.as_view()),
-    # path("update-unavailability/<int:id>", UpdateUnavailabilityView.as_view()),
+    path("list-scales", ListScalesView.as_view()),
+    path("delete-scale/<int:id>", DeleteScaleView.as_view()),
+    path("update-scale/<int:id>", UpdateScaleView.as_view()),
+    path("create-unavailability", CreateUnavailabilityView.as_view()),
+    path("list-unavailabilities", ListUnavailabilitiesView.as_view()),
+    path("update-unavailability/<int:id>", UpdateUnavailabilityView.as_view()),
     path("assign-ministry", AssignMinistryView.as_view()),
-    # path("assign-function", AssignFunctionView.as_view()),
+    path("assign-function", AssignFunctionView.as_view()),
 ]
