@@ -84,7 +84,7 @@ class Song(models.Model):
         verbose_name_plural = "Songs"
 
     def __str__(self):
-        return f"{self.name} ' - ' {self.description}"
+        return f"{self.name} - {self.singer.name if self.singer else ''}"
 
 
 class Scale(models.Model):
