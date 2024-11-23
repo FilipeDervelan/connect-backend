@@ -1,18 +1,23 @@
 from django.contrib import admin
 
-from app.models import Function, Ministry, Scale, User
+from app.models import CustomUser, Function, Ministry, Scale
 
-class UserAdmin(admin.ModelAdmin):
+
+class CustomUserAdmin(admin.ModelAdmin):
     search_fields = ["name"]
-    list_display = ["name",
-                    "email",
-                    "birth_day",
-                    "created_at",
-                    "updated_at"
+    list_display = [
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "birth_day",
+        "created_at",
+        "updated_at",
     ]
 
+
 # Register your models here.
-admin.site.register(User, UserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Ministry)
 admin.site.register(Function)
 admin.site.register(Scale)
