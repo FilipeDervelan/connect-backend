@@ -1,31 +1,31 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.request import Request
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from application.useCases.EditUser.EditUser import EditUser
-from application.useCases.EditUser.protocols.EditUserRequest import EditUserRequest
+from application.useCases.UpdateUser.UpdateUser import UpdateUser
+from application.useCases.UpdateUser.protocols.UpdateUserRequest import (
+    UpdateUserRequest,
+)
 
 
-class EditUserView(APIView):
+class UpdateUserView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def put(self, request, id):
+    def put(self, request: Request, id: int) -> Response:
         try:
-            # Building inbound
-            inbound = EditUserRequest()
+            inbound = UpdateUserRequest()
             inbound.id = id
             inbound.name = request.data.get("name")
             inbound.birth_day = request.data.get("birth_day")
 
-            # Calling use case
-            useCase = EditUser()
+            useCase = UpdateUser()
             result = useCase.execute(inbound)
 
-            # Serializing
             outbound = result.__dict__
 
-            return Response({"data": outbound}, status=status.HTTP_200_OK)
+            return Response(outbound, status=status.HTTP_200_OK)
 
         except Exception as e:
             import traceback
