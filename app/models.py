@@ -84,7 +84,7 @@ class Song(models.Model):
         verbose_name_plural = "Songs"
 
     def __str__(self):
-        return f"{self.name} - {self.singer.name if self.singer else ''}"
+        return f"{self.name} {f'- {self.singer.name}' if self.singer else ''}"
 
 
 class Scale(models.Model):
@@ -94,7 +94,6 @@ class Scale(models.Model):
     date = models.DateField(null=True, blank=True)
     song = models.ManyToManyField(Song, null=True, blank=True)
     participant = models.ManyToManyField(CustomUser, null=True, blank=True)
-    function = models.ManyToManyField(Function, null=True, blank=True)
     ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
@@ -104,7 +103,7 @@ class Scale(models.Model):
         verbose_name_plural = "Scales"
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.date} - {self.ministry.name}"
 
 
 class Unavailability(models.Model):
