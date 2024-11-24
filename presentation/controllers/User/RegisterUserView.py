@@ -1,10 +1,11 @@
+from application.useCases.RegisterUser.RegisterUser import RegisterUser
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 
-from application.useCases.register_user.register_user import RegisterUser
+
 
 
 class RegisterUserView(APIView):
