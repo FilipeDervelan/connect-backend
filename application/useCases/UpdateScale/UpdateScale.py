@@ -17,23 +17,17 @@ class UpdateScale:
 
         obj.name = inbound.name
         obj.description = inbound.description
-        obj.date = inbound.date
+        obj.date = date
 
-        for song in inbound.songs:
-            scale_song = Song.objects.get(id=song)
+        song_objects = Song.objects.filter(id__in=inbound.songs)
+        obj.song.set(song_objects)
 
-            obj.song.add(scale_song)
+        participant_objects = CustomUser.objects.filter(
+            id__in=inbound.participants,
+        )
+        obj.participant.set(participant_objects)
 
-        for participant in inbound.participants:
-            scale_participant = CustomUser.objects.get(id=participant)
-
-            obj.participant.add(scale_participant)
-
-        ministry = Ministry.objects.get(id=inbound.ministry_id)
-
-        obj.ministry = ministry
         obj.updated_at = datetime.now()
-
         obj.save()
 
         result = UpdateScaleResponse()
