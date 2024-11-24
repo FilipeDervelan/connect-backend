@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.db.models import Q
-from app.models import CustomUser, Ministry, Scale, Unavailability
+from app.models import CustomUser, Ministry, Scale, Song, Unavailability
 from application.useCases.CreateScale.protocols.CreateScaleRequest import (
     CreateScaleRequest,
 )
@@ -16,7 +16,6 @@ class CreateScale:
         date = inbound.date
         songs = inbound.song
         participants = inbound.participants
-        functions = inbound.function
         ministry_id = inbound.ministry_id
 
         result = CreateScaleResponse()
@@ -47,7 +46,7 @@ class CreateScale:
         ).first()
 
         if scale:
-            result.response = "A scale alreay exists for this day and this ministry"
+            result.response = "A scale already exists for this day and this ministry"
             result.status = 400
 
             return result
@@ -64,6 +63,14 @@ class CreateScale:
         scale = Scale.objects.get(date=formatted_date, name=name)
 
         participants_with_unavailabilities = []
+
+        for song_id in songs:
+            song = Song.objects.get(id=song_id)
+
+            if song in scale.song:
+                continue
+
+            scale.song.add(song)
 
         for id in participants:
             user = CustomUser.objects.get(id=id)
