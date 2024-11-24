@@ -1,0 +1,2 @@
+class CreateSingerRequest:
+    name: str
