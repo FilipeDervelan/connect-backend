@@ -19,10 +19,14 @@ class ListScales:
                     "name": item.name,
                     "description": item.description,
                     "date": item.date,
-                    "songs": item.song.name,
-                    "participants": item.participant.name,
-                    "functions": item.function.name,
-                    "ministry": item.ministry.name,
+                    "songs": [
+                        {"id": song.id, "name": song.name} for song in item.song.all()
+                    ],
+                    "participants": [
+                        {"id": participant.id, "name": participant.username}
+                        for participant in item.participant.all()
+                    ],
+                    "ministry": {"id": item.ministry.id, "name": item.ministry.name},
                 }
             )
 
