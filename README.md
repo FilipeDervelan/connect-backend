@@ -11,7 +11,7 @@
 - [x] CRUD de ministérios
 - [x] CRUD de escalas
 - [x] CRUD de indisponibilidades
-- [ ] Log In e permissões
+- [x] Autenticação
 
 ### Pré-requisitos
 
@@ -56,7 +56,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <a href="https://www.linkedin.com/in/filipedervelan/">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/100243045?v=4" width="100px;" alt=""/>
  <br />
- <sub><b>Filipe Dervelan</b></sub></a>
+ <sub><b>Filipe Dervelan</b></sub>
+</a>
 
 
 Apaixonado por tecnologia e programação
