@@ -4,6 +4,7 @@ from rest_framework_simplejwt import views as jwt_views
 
 from presentation.controllers.Function.AssignFunctionView import AssignFunctionView
 from presentation.controllers.Function.CreateFunctionView import CreateFunctionView
+from presentation.controllers.Function.ListFunctionsView import ListFunctionsView
 from presentation.controllers.Function.UpdateFunctionView import UpdateFunctionView
 from presentation.controllers.Logout.logout_view import LogoutView
 from presentation.controllers.Ministry.AssignMinistryView import AssignMinistryView
@@ -21,6 +22,7 @@ from presentation.controllers.Scale.UpdateScaleView import UpdateScaleView
 from presentation.controllers.Singer.CreateSingerView import CreateSingerView
 from presentation.controllers.Song.CreateSongView import CreateSongView
 from presentation.controllers.Song.ListSongsView import ListSongsView
+from presentation.controllers.Song.UpdateSongView import UpdateSongView
 from presentation.controllers.Unavailability.CreateUnavailabilityView import (
     CreateUnavailabilityView,
 )
@@ -75,4 +77,6 @@ urlpatterns = [
     path("list-songs", ListSongsView.as_view()),
     path("create-singer", CreateSingerView.as_view()),
     path("list-users", ListUsersView.as_view()),
+    path("update-song", UpdateSongView.as_view()),
+    path("list-functions", ListFunctionsView.as_view()),
 ]
