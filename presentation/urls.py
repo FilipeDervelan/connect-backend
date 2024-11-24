@@ -18,6 +18,7 @@ from presentation.controllers.Scale.CreateScaleView import CreateScaleView
 from presentation.controllers.Scale.DeleteScaleView import DeleteScaleView
 from presentation.controllers.Scale.ListScalesView import ListScalesView
 from presentation.controllers.Scale.UpdateScaleView import UpdateScaleView
+from presentation.controllers.Singer.CreateSingerView import CreateSingerView
 from presentation.controllers.Song.CreateSongView import CreateSongView
 from presentation.controllers.Song.ListSongsView import ListSongsView
 from presentation.controllers.Unavailability.CreateUnavailabilityView import (
@@ -33,6 +34,8 @@ from presentation.controllers.Unavailability.UpdateUnavailabilityView import (
     UpdateUnavailabilityView,
 )
 from presentation.controllers.User.DeleteUserView import DeleteUserView
+from presentation.controllers.User.ListUsersView import ListUsersView
+from presentation.controllers.User.UpdateUserView import UpdateUserView
 from presentation.controllers.register_user.register_user_view import RegisterUserView
 
 
@@ -49,7 +52,7 @@ urlpatterns = [
         jwt_views.TokenRefreshView.as_view(),
         name="token_refresh",
     ),
-    # path("edit-user/<int:id>", EditUserView.as_view()),
+    path("update-user/<int:id>", UpdateUserView.as_view()),
     path("delete-user/<int:id>", DeleteUserView.as_view()),
     path("create-function", CreateFunctionView.as_view()),
     path("update-function", UpdateFunctionView.as_view()),
@@ -70,4 +73,6 @@ urlpatterns = [
     path("delete-unavailability/<int:id>", DeleteUnavailabilityView.as_view()),
     path("create-song", CreateSongView.as_view()),
     path("list-songs", ListSongsView.as_view()),
+    path("create-singer", CreateSingerView.as_view()),
+    path("list-users", ListUsersView.as_view()),
 ]
