@@ -5,9 +5,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 
-
-
-
 class RegisterUserView(APIView):
     def post(self, request: Request) -> Response:
         try:
@@ -21,6 +18,6 @@ class RegisterUserView(APIView):
 
         except Exception as e:
             return Response(
-                {"error": str(e)},
+                str(e),
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
