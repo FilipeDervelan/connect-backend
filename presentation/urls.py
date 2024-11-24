@@ -36,7 +36,7 @@ from presentation.controllers.Unavailability.UpdateUnavailabilityView import (
 from presentation.controllers.User.DeleteUserView import DeleteUserView
 from presentation.controllers.User.ListUsersView import ListUsersView
 from presentation.controllers.User.UpdateUserView import UpdateUserView
-from presentation.controllers.register_user.register_user_view import RegisterUserView
+from presentation.controllers.User.RegisterUserView import RegisterUserView
 
 
 urlpatterns = [
