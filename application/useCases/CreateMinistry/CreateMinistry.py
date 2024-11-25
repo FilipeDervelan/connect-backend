@@ -1,11 +1,17 @@
 from app.models import Ministry
+from application.useCases.CreateMinistry.protocols.CreateMinistryRequest import (
+    CreateMinistryRequest,
+)
 from application.useCases.CreateMinistry.protocols.CreateMinistryResponse import (
     CreateMinistryResponse,
 )
 
 
 class CreateMinistry:
-    def execute(self, inbound):
+    def execute(
+        self,
+        inbound: CreateMinistryRequest,
+    ) -> CreateMinistryResponse:
         result = CreateMinistryResponse()
 
         if not inbound.name:
@@ -25,7 +31,6 @@ class CreateMinistry:
 
             return result
 
-        # Creating user
         new_ministry = Ministry(
             name=name,
             description=description,
