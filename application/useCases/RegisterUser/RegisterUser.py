@@ -2,10 +2,10 @@ from rest_framework import status
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from application.useCases.register_user.protocols.register_user_request import (
+from application.useCases.RegisterUser.protocols.RegisterUserRequest import (
     RegisterUserRequest,
 )
-from application.useCases.register_user.protocols.register_user_response import (
+from application.useCases.RegisterUser.protocols.RegisterUserResponse import (
     RegisterUserResponse,
 )
 
@@ -14,9 +14,7 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
-        write_only=True
-    )  # Para não expor o password na resposta
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
@@ -32,9 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
             "ministry",
         ]
         extra_kwargs = {
-            "password": {
-                "write_only": True
-            },  # Apenas para escrita, nunca será retornado
+            "password": {"write_only": True},
         }
 
     def create(self, validated_data):
@@ -47,7 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
             last_name=validated_data["last_name"],
             birth_day=validated_data["birth_day"],
         )
-        user.set_password(password)  # Garante que o password seja salvo de forma segura
+        user.set_password(password)
         user.save()
 
         return user
@@ -57,7 +53,6 @@ class RegisterUser:
     def execute(self, inbound: dict) -> RegisterUserResponse:
         outbound = RegisterUserResponse()
 
-        # Validação usando RegisterUserRequest
         serializer = RegisterUserRequest(data=inbound)
 
         if not serializer.is_valid():
@@ -65,7 +60,6 @@ class RegisterUser:
             outbound.status = status.HTTP_400_BAD_REQUEST
             return outbound
 
-        # Criação do usuário
         user_serializer = UserSerializer(data=serializer.validated_data)
         if user_serializer.is_valid():
             user_serializer.save()
