@@ -1,65 +1,47 @@
-# Connect Backend
+# Connect
 
-<h4 align="center"> 
-	🚧  Connect Backend 🚀 Em construção...  🚧
-</h4>
+**Connect** is a backend system designed to manage schedules, roles, and ministries within a church. It provides a robust interface to organize and optimize activities and tasks related to church management.
 
-<p>Backend para aplicações de gerenciamento de escalas e membros de igrejas</p>
+## Features
 
-### Features
+- **Schedule Management**  
+  Create and edit schedules for various ministries and events.
 
-- [x] CRUD de ministérios
-- [x] CRUD de escalas
-- [x] CRUD de indisponibilidades
-- [x] Autenticação
+- **Role Management**  
+  Define and organize roles within each member.
 
-### Pré-requisitos
+- **Ministry Administration**  
+  Register and manage information related to church ministries.
 
-Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Python](https://www.python.org/downloads/). 
+## Technologies Used
 
-### 🎲 Rodando o Projeto
+- **Django** - A Python web framework for fast and secure development.
+- **Django REST Framework** - A powerful toolkit for building RESTful APIs.
+- **JWT (JSON Web Token)** - Library to make authentication.
 
-```bash
-# Clone este repositório
-$ git clone <https://github.com/FilipeDervelan/connect-backend.git>
+## Requirements
 
-# Acesse a pasta do projeto no terminal/cmd
-$ cd connect-backend
+- Python 3.9 or higher
+- Virtualenv (optional but recommended)
 
-# Crie o ambiente virtual (VENV)
-$ python3 -m venv venv
+## Installation
 
-# Ative a venv
-$ source venv/bin/activate
-
-# Instale as dependências
-$ pip install -r requirements.txt
-
-# Execute a aplicação
-$ python3 manage.py runserver
-
-# O backend end inciará na porta:8000 - acesse <http://localhost:8000>
-```
-
-### 🛠 Tecnologias
-
-As seguintes ferramentas foram usadas na construção do projeto:
-
-- [Python](https://www.python.org/)
-- [Django](https://www.djangoproject.com/)
-- [Django Rest Framework](https://www.django-rest-framework.org/)
-
-### Autor
----
-
-<a href="https://www.linkedin.com/in/filipedervelan/">
- <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/100243045?v=4" width="100px;" alt=""/>
- <br />
- <sub><b>Filipe Dervelan</b></sub>
-</a>
-
-
-Apaixonado por tecnologia e programação
-
-[![Linkedin Badge](https://img.shields.io/badge/-Filipe-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/filipedervelan/)](https://www.linkedin.com/in/filipedervelan/) 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/connect.git
+   cd connect
+2. Create and activate a virtual environment:
+   ```
+   python3 -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   venv\Scripts\activate     # Windows
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+4. Configure the database in the settings.py file.
+5. Apply database migrations:
+   ```
+   python3 manage.py migrate
+6. Start the development server:
+   ```
+   python3 manage.py runserver
