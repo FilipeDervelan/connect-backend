@@ -1,6 +1,6 @@
 # Connect
 
-**Connect** is a backend system designed to manage schedules, roles, and ministries within a church. It provides a robust interface to organize and optimize activities and tasks related to church management.
+**Connect** is a backend system designed to manage schedules, roles, and ministries within a church. It provides a robust control to organize and optimize activities and tasks related to church management.
 
 ## Features
 
