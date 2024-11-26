@@ -26,7 +26,6 @@ class ListMinistries:
                         "participants": [
                             participant.id for participant in scale.participant.all()
                         ],
-                        "functions": [function.id for function in scale.function.all()],
                         "ministry_id": scale.ministry.id,
                     }
                 )
