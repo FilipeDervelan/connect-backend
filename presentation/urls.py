@@ -6,6 +6,7 @@ from presentation.controllers.Function.AssignFunctionView import AssignFunctionV
 from presentation.controllers.Function.CreateFunctionView import CreateFunctionView
 from presentation.controllers.Function.ListFunctionsView import ListFunctionsView
 from presentation.controllers.Function.UpdateFunctionView import UpdateFunctionView
+from presentation.controllers.Login.LoginControllerView import login
 from presentation.controllers.Logout.logout_view import LogoutView
 from presentation.controllers.Ministry.AssignMinistryView import AssignMinistryView
 from presentation.controllers.Ministry.CreateMinistryView import CreateMinistryView
@@ -43,12 +44,8 @@ from presentation.controllers.User.RegisterUserView import RegisterUserView
 
 urlpatterns = [
     path("register/", RegisterUserView.as_view(), name="register"),
+    path("login/", login, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
-    path(
-        "token/",
-        jwt_views.TokenObtainPairView.as_view(),
-        name="token_obtain_pair",
-    ),
     path(
         "token/refresh/",
         jwt_views.TokenRefreshView.as_view(),
