@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import status
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
@@ -52,6 +53,11 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterUser:
     def execute(self, inbound: dict) -> RegisterUserResponse:
         outbound = RegisterUserResponse()
+
+        if "birth_day" in inbound:
+            inbound["birth_day"] = datetime.fromisoformat(
+                inbound["birth_day"].replace("Z", "+00:00")
+            ).date()
 
         serializer = RegisterUserRequest(data=inbound)
 
