@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
+from app.models import CustomUser
 from application.useCases.RegisterUser.protocols.RegisterUserRequest import (
     RegisterUserRequest,
 )
@@ -53,6 +54,14 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterUser:
     def execute(self, inbound: dict) -> RegisterUserResponse:
         outbound = RegisterUserResponse()
+
+        user_email = CustomUser.objects.filter(email=inbound["email"])
+
+        if user_email.exists():
+            outbound.message = "Email already registered"
+            outbound.status = 400
+
+            return outbound
 
         if "birth_day" in inbound:
             inbound["birth_day"] = datetime.fromisoformat(
