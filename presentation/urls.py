@@ -16,6 +16,7 @@ from presentation.controllers.Ministry.UpdateMinistryView import UpdateMinistryV
 from presentation.controllers.Ministry.DeassignMinistryView import (
     DeassignMinistryView,
 )
+from presentation.controllers.ResetPassword.ResetPasswordView import reset_password
 from presentation.controllers.Scale.CreateScaleView import CreateScaleView
 from presentation.controllers.Scale.DeleteScaleView import DeleteScaleView
 from presentation.controllers.Scale.ListScalesView import ListScalesView
@@ -51,6 +52,7 @@ urlpatterns = [
         jwt_views.TokenRefreshView.as_view(),
         name="token_refresh",
     ),
+    path("reset-password/", reset_password, name="reset password"),
     path("update-user/<int:id>", UpdateUserView.as_view()),
     path("delete-user/<int:id>", DeleteUserView.as_view()),
     path("create-function", CreateFunctionView.as_view()),
