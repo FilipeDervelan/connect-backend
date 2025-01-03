@@ -17,8 +17,10 @@ class UpdateUserView(APIView):
         try:
             inbound = UpdateUserRequest()
             inbound.id = id
-            inbound.name = request.data.get("name")
-            inbound.birth_day = request.data.get("birth_day")
+            inbound.username = request.data.get("username")
+            inbound.first_name = request.data.get("first_name")
+            inbound.last_name = request.data.get("last_name")
+            inbound.birth_date = request.data.get("birth_date")
 
             useCase = UpdateUser()
             result = useCase.execute(inbound)
@@ -28,10 +30,7 @@ class UpdateUserView(APIView):
             return Response(outbound, status=status.HTTP_200_OK)
 
         except Exception as e:
-            import traceback
-
-            traceback.print_exc()
             return Response(
-                {"error": str(e)},
+                str(e),
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
