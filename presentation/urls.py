@@ -38,6 +38,7 @@ from presentation.controllers.Unavailability.UpdateUnavailabilityView import (
     UpdateUnavailabilityView,
 )
 from presentation.controllers.User.DeleteUserView import DeleteUserView
+from presentation.controllers.User.GetUserView import GetUserView
 from presentation.controllers.User.ListUsersView import ListUsersView
 from presentation.controllers.User.UpdateUserView import UpdateUserView
 from presentation.controllers.User.RegisterUserView import RegisterUserView
@@ -78,4 +79,5 @@ urlpatterns = [
     path("list-users", ListUsersView.as_view()),
     path("update-song", UpdateSongView.as_view()),
     path("list-functions", ListFunctionsView.as_view()),
+    path("get-user/<int:id>", GetUserView.as_view()),
 ]
