@@ -12,11 +12,15 @@ class UpdateUser:
     def execute(self, inbound: UpdateUserRequest) -> UpdateUserResponse:
         user = CustomUser.objects.get(id=inbound.id)
 
-        birth_day = datetime.strptime(inbound.birth_day, "%d/%m/%Y")
-        birth_day = birth_day.strftime("%Y-%m-%d")
+        date_str = inbound.birth_date.split("T")[0]
 
-        user.username = inbound.name
-        user.birth_day = birth_day
+        birth_date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+        birth_date = birth_date_obj.strftime("%Y-%m-%d")
+
+        user.username = inbound.username.strip()
+        user.first_name = inbound.first_name.strip()
+        user.last_name = inbound.last_name.strip()
+        user.birth_day = birth_date
         user.updated_at = datetime.now()
 
         user.save()

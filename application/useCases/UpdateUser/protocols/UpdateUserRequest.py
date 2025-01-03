@@ -3,5 +3,7 @@ import datetime
 
 class UpdateUserRequest:
     id: int
-    name: str
-    birth_day: datetime
+    username: str
+    first_name: str
+    last_name: str
+    birth_date: datetime
