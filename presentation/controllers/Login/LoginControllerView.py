@@ -37,8 +37,8 @@ def login(request: Request) -> Response:
             {
                 "access": str(refresh.access_token),
                 "refresh_token": str(refresh),
+                "uid": login_response.user.id,
                 "username": login_response.user.username,
-                "email": login_response.user.email,
             }
         )
         return response
