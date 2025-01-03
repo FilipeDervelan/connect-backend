@@ -81,7 +81,13 @@ class RegisterUser:
             outbound.message = "User created successfully!"
             outbound.status = status.HTTP_201_CREATED
         else:
-            outbound.message = user_serializer.errors
+            message = user_serializer.errors
+
+            if "username" in message:
+                outbound.message = user_serializer.errors["username"][0]
+            else:
+                outbound.message = user_serializer.errors
+
             outbound.status = status.HTTP_400_BAD_REQUEST
 
         return outbound
