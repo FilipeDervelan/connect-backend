@@ -1,0 +1,2 @@
+class ListUserMinistriesRequest:
+    id: int
