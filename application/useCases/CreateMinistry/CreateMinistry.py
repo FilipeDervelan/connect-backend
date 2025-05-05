@@ -1,4 +1,4 @@
-from app.models import Ministry
+from app.models import CustomUser, Ministry
 from application.useCases.CreateMinistry.protocols.CreateMinistryRequest import (
     CreateMinistryRequest,
 )
@@ -38,6 +38,9 @@ class CreateMinistry:
         )
 
         new_ministry.save()
+
+        user = CustomUser.objects.get(id=inbound.user_id)
+        user.ministry.add(new_ministry)
 
         result.response = "Successfully Created"
         result.status = 201

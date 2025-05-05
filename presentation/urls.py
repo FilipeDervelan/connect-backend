@@ -12,6 +12,9 @@ from presentation.controllers.Ministry.AssignMinistryView import AssignMinistryV
 from presentation.controllers.Ministry.CreateMinistryView import CreateMinistryView
 from presentation.controllers.Ministry.DeleteMinistryView import DeleteMinistryView
 from presentation.controllers.Ministry.ListMinistriesView import ListMinistriesView
+from presentation.controllers.Ministry.ListUserMinistriesView import (
+    ListUserMinistriesView,
+)
 from presentation.controllers.Ministry.UpdateMinistryView import UpdateMinistryView
 from presentation.controllers.Ministry.DeassignMinistryView import (
     DeassignMinistryView,
@@ -80,4 +83,5 @@ urlpatterns = [
     path("update-song", UpdateSongView.as_view()),
     path("list-functions", ListFunctionsView.as_view()),
     path("get-user/<int:id>", GetUserView.as_view()),
+    path("list-user-ministries", ListUserMinistriesView.as_view()),
 ]
