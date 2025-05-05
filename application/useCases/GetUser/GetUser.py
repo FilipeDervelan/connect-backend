@@ -9,12 +9,15 @@ class GetUser:
 
         user = CustomUser.objects.get(id=inbound.id)
 
+        photo_url = user.profile_picture.url if user.profile_picture else None
+
         result = {
             "id": user.id,
             "username": user.username,
             "first_name": user.first_name,
             "last_name": user.last_name,
             "birth_date": user.birth_day,
+            "photo": photo_url,
             "created_at": user.created_at.strftime("%d/%m/%Y"),
         }
 

@@ -10,7 +10,7 @@ from application.useCases.CreateMinistry.protocols.CreateMinistryRequest import 
 
 
 class CreateMinistryView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         try:

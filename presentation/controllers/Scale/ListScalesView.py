@@ -7,7 +7,7 @@ from application.useCases.ListScales.ListScales import ListScales
 
 
 class ListScalesView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         useCase = ListScales()

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 
@@ -19,6 +21,7 @@ from presentation.controllers.Ministry.DeassignMinistryView import (
 from presentation.controllers.ResetPassword.ResetPasswordView import reset_password
 from presentation.controllers.Scale.CreateScaleView import CreateScaleView
 from presentation.controllers.Scale.DeleteScaleView import DeleteScaleView
+from presentation.controllers.Scale.GetScaleView import GetScaleView
 from presentation.controllers.Scale.ListScalesView import ListScalesView
 from presentation.controllers.Scale.UpdateScaleView import UpdateScaleView
 from presentation.controllers.Singer.CreateSingerView import CreateSingerView
@@ -40,6 +43,9 @@ from presentation.controllers.Unavailability.UpdateUnavailabilityView import (
 from presentation.controllers.User.DeleteUserView import DeleteUserView
 from presentation.controllers.User.GetUserView import GetUserView
 from presentation.controllers.User.ListUsersView import ListUsersView
+from presentation.controllers.User.UpdateProfilePictureView import (
+    UpdateProfilePictureView,
+)
 from presentation.controllers.User.UpdateUserView import UpdateUserView
 from presentation.controllers.User.RegisterUserView import RegisterUserView
 
@@ -80,4 +86,10 @@ urlpatterns = [
     path("update-song", UpdateSongView.as_view()),
     path("list-functions", ListFunctionsView.as_view()),
     path("get-user/<int:id>", GetUserView.as_view()),
-]
+    path(
+        "update-profile-picture/<int:uid>",
+        UpdateProfilePictureView.as_view(),
+        name="Update Profile Picture",
+    ),
+    path("get-scale/<int>id", GetScaleView.as_view()),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

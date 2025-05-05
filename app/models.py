@@ -38,6 +38,9 @@ class Function(models.Model):
 
 class CustomUser(AbstractUser):
     birth_day = models.DateField(null=True, blank=True)
+    profile_picture = models.ImageField(
+        upload_to="profile_pictures/", null=True, blank=True
+    )
     function = models.ManyToManyField(Function, blank=True)
     ministry = models.ManyToManyField(Ministry, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -97,6 +100,7 @@ class Scale(models.Model):
     ministry = models.ForeignKey(Ministry, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
+    created_by = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
         db_table = "scale"

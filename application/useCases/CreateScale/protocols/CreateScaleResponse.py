@@ -1,3 +1,2 @@
 class CreateScaleResponse:
-    response:str
-    status:int
+    response: str

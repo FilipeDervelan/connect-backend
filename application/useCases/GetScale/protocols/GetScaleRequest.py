@@ -1,0 +1,2 @@
+class GetScaleRequest:
+    id: int
