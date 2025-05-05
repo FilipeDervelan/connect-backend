@@ -23,11 +23,9 @@ class ListUserMinistriesView(APIView):
             inbound.id = request.user.id
 
             user_case = ListUserMinistries()
-            result = user_case.execute(inbound)
+            outbound = user_case.execute(inbound)
 
-            outbound = result.response
-
-            return Response(outbound, status=status.HTTP_200_OK)
+            return Response(outbound.result)
 
         except Exception as e:
             return Response(

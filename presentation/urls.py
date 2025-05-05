@@ -14,6 +14,9 @@ from presentation.controllers.Ministry.AssignMinistryView import AssignMinistryV
 from presentation.controllers.Ministry.CreateMinistryView import CreateMinistryView
 from presentation.controllers.Ministry.DeleteMinistryView import DeleteMinistryView
 from presentation.controllers.Ministry.ListMinistriesView import ListMinistriesView
+from presentation.controllers.Ministry.ListUserMinistriesView import (
+    ListUserMinistriesView,
+)
 from presentation.controllers.Ministry.UpdateMinistryView import UpdateMinistryView
 from presentation.controllers.Ministry.DeassignMinistryView import (
     DeassignMinistryView,
@@ -92,4 +95,5 @@ urlpatterns = [
         name="Update Profile Picture",
     ),
     path("get-scale/<int>id", GetScaleView.as_view()),
+    path("list-user-ministries", ListUserMinistriesView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

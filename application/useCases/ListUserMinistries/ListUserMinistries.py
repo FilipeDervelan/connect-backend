@@ -14,8 +14,21 @@ class ListUserMinistries:
     ) -> ListUserMinistriesResponse:
         outbound = ListUserMinistriesResponse()
 
-        user = CustomUser.objects.filter(id=inbound.id)
+        user = CustomUser.objects.get(id=inbound.id)
+        ministries = user.ministry.all()
 
-        ministries = Ministry.objects.filter()
+        ministries_list = [
+            {
+                "id": ministry.id,
+                "name": ministry.name,
+                "description": ministry.description,
+                "owner": CustomUser.objects.get(id=ministry.owner_id).username,
+                "created_at": ministry.created_at,
+                "updated_at": ministry.updated_at,
+            }
+            for ministry in ministries
+        ]
+
+        outbound.result = ministries_list
 
         return outbound
